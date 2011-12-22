@@ -11,8 +11,9 @@ class FileManager : public QObject
 {
     Q_OBJECT
 private:
-    QList<QPixmap> m_imageList;
+    QList<QPixmap> mImageList;
     QString m_currentDir;
+    int mLastImageNumber;
 
 
 public:
@@ -21,7 +22,10 @@ public:
     void loadImages();
     int getCount();
     void clear();
-    QPixmap at(int i);
+    QPixmap nextImage();
+    QPixmap prevImage();
+    QPixmap currentImage();
+    QPixmap imageNum(int id);
 
 signals:
     

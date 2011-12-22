@@ -4,42 +4,44 @@
 
 #include <QDebug>
 
-QDir mi_startDir;
+//This is a file only member. No need to be a class member.
+QDir _mStartDir_;
 
 FileManager::FileManager(QObject *parent) :
     QObject(parent)
 {
+    mLastImageNumber = 0;
 }
 
 int FileManager::setDirectory(QString dir){
     if (dir == "/"){
         //Current path is where the program begins
-        mi_startDir = QDir::currentPath();
+        _mStartDir_ = QDir::currentPath();
         //Don't show any special files and only readable ones
-        mi_startDir.setFilter(QDir::NoDotAndDotDot | QDir::Files | QDir::Readable);
+        _mStartDir_.setFilter(QDir::NoDotAndDotDot | QDir::Files | QDir::Readable);
         //We sort all by name igonring the case
-        mi_startDir.setSorting(QDir::Name | QDir::IgnoreCase);
+        _mStartDir_.setSorting(QDir::Name | QDir::IgnoreCase);
 
         //reating a list of masks of interesting filetypes
         QStringList fileTypeList;
-        for (int i=0; i < (sizeof(fileTypes)/sizeof(QString)); i++){
+        for (unsigned int i=0; i < (sizeof(fileTypes)/sizeof(QString)); i++){
             fileTypeList.append(fileTypes[i]);
         }
         //Seting the mask
-        mi_startDir.setNameFilters(fileTypeList);
+        _mStartDir_.setNameFilters(fileTypeList);
 
         /*
-          //How many files we have
-        qDebug() << startDir.count();
+        //How many files we have
+        qDebug() << "How many files" << _mStartDir_.count();
         */
 
         /*
         //Information about files
-        QFileInfoList list = startDir.entryInfoList();
+        QFileInfoList list = _mStartDir_.entryInfoList();
         for (int i = 0; i < list.size(); ++i)  {
             QFileInfo fileInfo = list.at(i);
             qDebug() << qPrintable(QString("%1 %2").arg(fileInfo.size(), 10)
-                                                    .arg(fileInfo.fileName()));
+                                   .arg(fileInfo.fileName()));
         }
         */
         //Everything goes fine
@@ -55,23 +57,45 @@ int FileManager::setDirectory(QString dir){
 
 void FileManager::loadImages(){
     //If the directory is not empty creates a list of images
-    foreach(QString fileName, mi_startDir.entryList()){
-        QPixmap pix = QPixmap(mi_startDir.absoluteFilePath(fileName));
+    foreach(QString fileName, _mStartDir_.entryList()){
+        //QPixmap pix = QPixmap(_mStartDir_.absoluteFilePath(fileName));
         //QPixmap pix = QPixmap("c:\\gotowe-1.jpg");
-        m_imageList.append(pix);
-        qDebug() << mi_startDir.absoluteFilePath(fileName);
+        mImageList.append(QPixmap(_mStartDir_.absoluteFilePath(fileName)));
+        //qDebug() <<"Loading file: " << _mStartDir_.absoluteFilePath(fileName);
     }
 }
 int FileManager::getCount(){
-    return m_imageList.size();
+    return mImageList.size();
 }
 void FileManager::clear(){
-    m_imageList.clear();
+    mImageList.clear();
 }
 
-QPixmap FileManager::at(int i){
-    //TODO: Should check if the image is valid, whathever it means
-    if (i <= m_imageList.size()){
-        return m_imageList.at(i);
+
+QPixmap FileManager::nextImage(){
+    QPixmap retunValue = this->imageNum(this->mLastImageNumber+1);
+    qDebug() << "Next" << mLastImageNumber;
+    return retunValue;
+}
+QPixmap FileManager::prevImage(){
+    QPixmap retunValue = this->imageNum(this->mLastImageNumber-1);
+    return retunValue;
+}
+
+QPixmap FileManager::currentImage(){
+    QPixmap retunValue = this->imageNum(this->mLastImageNumber);
+    return retunValue;
+}
+
+QPixmap FileManager::imageNum(int id){
+    if ( (id > -1) && (id < mImageList.size()) ){
+        QPixmap theImage = mImageList.at(id);
+        if (!theImage.isNull()){
+            //We should not change the image number when it is wrong
+            mLastImageNumber = id;
+            return theImage;
+        }
     }
+    //The number was wrongo or the image was null
+    return QPixmap();
 }

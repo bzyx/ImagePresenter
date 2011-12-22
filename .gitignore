@@ -27,3 +27,7 @@ obj/
 [Rr]elease*/
 _ReSharper*/
 [Tt]est[Rr]esult*
+
+*.dll
+ImagePresenter-build-desktop-Qt_in_PATH_Debug/
+ImagePresenter-build-desktop-Qt_in_PATH_Release/
