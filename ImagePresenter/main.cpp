@@ -24,23 +24,11 @@ int main(int argc, char *argv[])
     Widget w;
 
 
-    /*
-    QLabel *label = new QLabel;
-    QScrollBar *scrollBar = new QScrollBar;
-    QObject::connect(scrollBar, SIGNAL(valueChanged(int)),
-                     label,  SLOT(setNum(int)));
-
-    */
-
     QObject::connect(&startScreen,SIGNAL(startButtonClicked()),
-                     &w, SLOT(show()));
+                     &w, SLOT(showFullScreen()));
     QObject::connect(&startScreen,SIGNAL(startButtonClicked()),
                      &startScreen, SLOT(hide()));
 
     startScreen.show();
-
-    //w.show();
-
-    //w.showFullScreen();
     return a.exec();
 }

@@ -51,7 +51,7 @@ bool Widget::eventFilter(QObject *obj, QEvent *evt) {
     if(obj == ui->gView && evt->type() == QEvent::KeyPress) {
         QKeyEvent *keyEvent = static_cast<QKeyEvent *>(evt);
         if (keyEvent->key()==Qt::Key_Left)
-             showImage(fileManager.prevImage());
+            showImage(fileManager.prevImage());
         if (keyEvent->key()==Qt::Key_Right)
             showImage(fileManager.nextImage());
         if (keyEvent->key()==Qt::Key_F1)
@@ -66,18 +66,6 @@ bool Widget::eventFilter(QObject *obj, QEvent *evt) {
         // Call the base class implementation
         return QWidget::eventFilter(obj, evt);
     }
-}
-
-void Widget::on_btn_prev_clicked()
-{
-    showImage(fileManager.prevImage());
-
-}
-
-void Widget::on_btn_next_clicked()
-{
-    showImage(fileManager.nextImage());
-
 }
 
 void Widget::helpDialog()
