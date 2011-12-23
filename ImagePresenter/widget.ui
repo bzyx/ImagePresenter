@@ -15,13 +15,6 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QPushButton" name="btn_help">
-     <property name="text">
-      <string>Pomoc</string>
-     </property>
-    </widget>
-   </item>
-   <item>
     <widget class="QGraphicsView" name="gView"/>
    </item>
    <item>
@@ -41,13 +34,6 @@
       </widget>
      </item>
     </layout>
-   </item>
-   <item>
-    <widget class="QPushButton" name="btn_changeImage">
-     <property name="text">
-      <string>Wybierz obraz</string>
-     </property>
-    </widget>
    </item>
   </layout>
  </widget>

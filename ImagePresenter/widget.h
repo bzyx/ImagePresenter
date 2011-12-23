@@ -20,12 +20,13 @@ public:
     explicit Widget(QWidget *parent = 0);
     ~Widget();
     bool eventFilter(QObject *obj, QEvent *evt);
+   // void keyPressEvent(QKeyEvent* event);
     
 private slots:
     void on_btn_prev_clicked();
     void on_btn_next_clicked();
-    void on_btn_help_clicked();
-    void on_btn_changeImage_clicked();
+    void helpDialog();
+    void selectImageDialog();
 
 private:
     Ui::Widget *ui;

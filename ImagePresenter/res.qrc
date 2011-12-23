@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/tra">
+        <file>qt_pl.ts</file>
+        <file>qt_pl.qm</file>
+    </qresource>
+</RCC>

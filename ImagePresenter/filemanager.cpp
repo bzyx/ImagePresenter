@@ -60,12 +60,15 @@ void FileManager::loadImages(){
     foreach(QString fileName, _mStartDir_.entryList()){
         //QPixmap pix = QPixmap(_mStartDir_.absoluteFilePath(fileName));
         //QPixmap pix = QPixmap("c:\\gotowe-1.jpg");
-        mImageList.append(QPixmap(_mStartDir_.absoluteFilePath(fileName)));
+        bool canBeConverted;
+        fileName.left(fileName.lastIndexOf(".")).toInt(&canBeConverted);
+        if (canBeConverted)
+            mImageList.append(QPixmap(_mStartDir_.absoluteFilePath(fileName)));
         //qDebug() <<"Loading file: " << _mStartDir_.absoluteFilePath(fileName);
     }
 }
-int FileManager::getCount(){
-    return mImageList.size();
+int FileManager::count(){
+    return mImageList.size()-1;
 }
 void FileManager::clear(){
     mImageList.clear();
@@ -98,4 +101,8 @@ QPixmap FileManager::imageNum(int id){
     }
     //The number was wrongo or the image was null
     return QPixmap();
+}
+
+int FileManager::currentNumber(){
+    return mLastImageNumber;
 }

@@ -20,12 +20,13 @@ public:
     explicit FileManager(QObject *parent = 0);
     int setDirectory(QString dir);
     void loadImages();
-    int getCount();
+    int count();
     void clear();
     QPixmap nextImage();
     QPixmap prevImage();
     QPixmap currentImage();
     QPixmap imageNum(int id);
+    int currentNumber();
 
 signals:
     

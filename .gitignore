@@ -31,3 +31,6 @@ _ReSharper*/
 *.dll
 ImagePresenter-build-desktop-Qt_in_PATH_Debug/
 ImagePresenter-build-desktop-Qt_in_PATH_Release/
+ImagePresenter-build-desktop-Qt_in_PATH_Debug/
+ImagePresenter-build-desktop-Qt_in_PATH_Debug/Makefile
+ImagePresenter-build-desktop-Qt_in_PATH_Debug/

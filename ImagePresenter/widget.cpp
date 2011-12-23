@@ -2,10 +2,14 @@
 
 #include <QGraphicsScene>
 #include <QGraphicsPixmapItem>
+#include <QSpinBox>
+#include <QInputDialog>
+#include <QKeyEvent>
 
 #include "widget.h"
 #include "ui_widget.h"
 
+#include "startandhelpscreen.h"
 
 
 Widget::Widget(QWidget *parent) :
@@ -18,7 +22,7 @@ Widget::Widget(QWidget *parent) :
         qWarning() << "There was no file";
     } else {
         fileManager.loadImages();
-        qDebug() << "I have loaded" << fileManager.getCount();
+        qDebug() << "I have loaded" << fileManager.count();
     }
     scene = new QGraphicsScene(this);
 
@@ -43,12 +47,26 @@ bool Widget::eventFilter(QObject *obj, QEvent *evt) {
         ui->gView->setSceneRect(0,0,ui->gView->width(), ui->gView->height());
         showImage(fileManager.currentImage());
         return QWidget::eventFilter(obj, evt);
+    }
+    if(obj == ui->gView && evt->type() == QEvent::KeyPress) {
+        QKeyEvent *keyEvent = static_cast<QKeyEvent *>(evt);
+        if (keyEvent->key()==Qt::Key_Left)
+             showImage(fileManager.prevImage());
+        if (keyEvent->key()==Qt::Key_Right)
+            showImage(fileManager.nextImage());
+        if (keyEvent->key()==Qt::Key_F1)
+            helpDialog();
+        if (keyEvent->key()==Qt::Key_F10)
+            selectImageDialog();
+        if (keyEvent->key()==Qt::Key_Escape)
+            close();
+        //The event is done.
+        return true;
     } else{
         // Call the base class implementation
         return QWidget::eventFilter(obj, evt);
     }
 }
-
 
 void Widget::on_btn_prev_clicked()
 {
@@ -62,14 +80,25 @@ void Widget::on_btn_next_clicked()
 
 }
 
-void Widget::on_btn_help_clicked()
+void Widget::helpDialog()
 {
     //Pomoc
+    StartAndHelpScreen *window;
+    window = new StartAndHelpScreen();
+    window->setButtonText("Powrót");
+    QObject::connect(window,SIGNAL(startButtonClicked()),window,SLOT(close()));
+    QObject::connect(window,SIGNAL(startButtonClicked()),window,SLOT(deleteLater()));
+    window->show();
 }
 
-void Widget::on_btn_changeImage_clicked()
+void Widget::selectImageDialog()
 {
-    //Wybór obrazka
+    int imageNumber = QInputDialog::getInteger(this,"Wybierz obraz",
+                                               "Podaj numer obrazu: ",
+                                               fileManager.currentNumber(),0,
+                                               fileManager.count());
+    qDebug() << imageNumber;
+    showImage(fileManager.imageNum(imageNumber));
 }
 
 bool Widget::showImage(QPixmap image){

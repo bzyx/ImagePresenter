@@ -12,9 +12,17 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         widget.cpp \
-    filemanager.cpp
+    filemanager.cpp \
+    startandhelpscreen.cpp
 
 HEADERS  += widget.h \
-    filemanager.h
+    filemanager.h \
+    startandhelpscreen.h
 
-FORMS    += widget.ui
+FORMS    += widget.ui \
+    startandhelpscreen.ui
+
+OTHER_FILES +=
+
+RESOURCES += \
+    res.qrc
