@@ -13,7 +13,17 @@
   <property name="windowTitle">
    <string>ImagePresenter</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>logo128.png</normaloff>logo128.png</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QGraphicsView { border-style: none; }</string>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="margin">
+    <number>0</number>
+   </property>
    <item>
     <widget class="QGraphicsView" name="gView"/>
    </item>

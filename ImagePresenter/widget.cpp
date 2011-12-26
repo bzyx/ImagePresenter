@@ -17,6 +17,7 @@ Widget::Widget(QWidget *parent) :
     ui(new Ui::Widget)
 {
     ui->setupUi(this);
+    //ui->Ui_Widget->setStyleSheet( "QGraphicsView { border-style: none; }" );
     if (fileManager.setDirectory("/")){
         //FIXME: No file in directory should show a dialog with error
         qWarning() << "There was no file";
@@ -30,6 +31,7 @@ Widget::Widget(QWidget *parent) :
     ui->gView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->gView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
+    //ui->gView->showFullScreen();
     ui->gView->installEventFilter(this);
 }
 

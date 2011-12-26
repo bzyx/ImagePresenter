@@ -16,7 +16,7 @@ FileManager::FileManager(QObject *parent) :
 int FileManager::setDirectory(QString dir){
     if (dir == "/"){
         //Current path is where the program begins
-        _mStartDir_ = QDir::currentPath();
+        _mStartDir_ = QDir::current();
         //Don't show any special files and only readable ones
         _mStartDir_.setFilter(QDir::NoDotAndDotDot | QDir::Files | QDir::Readable);
         //We sort all by name igonring the case

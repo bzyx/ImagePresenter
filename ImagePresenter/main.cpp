@@ -24,8 +24,14 @@ int main(int argc, char *argv[])
     Widget w;
 
 
+
     QObject::connect(&startScreen,SIGNAL(startButtonClicked()),
                      &w, SLOT(showFullScreen()));
+
+    /*
+    QObject::connect(&startScreen,SIGNAL(startButtonClicked()),
+                     &w, SLOT(show()));
+    */
     QObject::connect(&startScreen,SIGNAL(startButtonClicked()),
                      &startScreen, SLOT(hide()));
 

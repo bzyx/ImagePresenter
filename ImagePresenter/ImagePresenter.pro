@@ -22,7 +22,9 @@ HEADERS  += widget.h \
 FORMS    += widget.ui \
     startandhelpscreen.ui
 
-OTHER_FILES +=
+OTHER_FILES += \
+    ImagePresenter.rc
 
 RESOURCES += \
     res.qrc
+win32:RC_FILE = ImagePresenter.rc
