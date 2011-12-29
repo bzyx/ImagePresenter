@@ -1,5 +1,8 @@
+#include <QMessageBox>
+
 #include "startandhelpscreen.h"
 #include "ui_startandhelpscreen.h"
+#include "aboutbox.h"
 
 StartAndHelpScreen::StartAndHelpScreen(QWidget *parent) :
     QDialog(parent),
@@ -22,3 +25,9 @@ void StartAndHelpScreen::setButtonText(QString newText){
     ui->startButton->setText(newText);
 }
 
+
+void StartAndHelpScreen::on_pushButton_clicked()
+{
+    AboutBox box;
+    box.exec();
+}

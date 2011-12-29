@@ -1,6 +1,8 @@
 #include "filemanager.h"
 #include <QFile>
 #include <QDir>
+#include <QCoreApplication>
+#include <QMessageBox>
 
 #include <QDebug>
 
@@ -16,7 +18,16 @@ FileManager::FileManager(QObject *parent) :
 int FileManager::setDirectory(QString dir){
     if (dir == "/"){
         //Current path is where the program begins
-        _mStartDir_ = QDir::current();
+        //_mStartDir_ = QDir::current();
+        //_mStartDir_ == dir.absolutePath();
+        _mStartDir_.setCurrent(QCoreApplication::applicationDirPath());
+        //_mStartDir_.
+        qDebug() << _mStartDir_;
+        //QMessageBox box;
+        //box.setText(_mStartDir_.currentPath());
+        //box.exec();
+       //// box.setText(_mStartDir_.path());
+       // box.exec();
         //Don't show any special files and only readable ones
         _mStartDir_.setFilter(QDir::NoDotAndDotDot | QDir::Files | QDir::Readable);
         //We sort all by name igonring the case
@@ -57,13 +68,16 @@ int FileManager::setDirectory(QString dir){
 
 void FileManager::loadImages(){
     //If the directory is not empty creates a list of images
+    int i = 0;
     foreach(QString fileName, _mStartDir_.entryList()){
         //QPixmap pix = QPixmap(_mStartDir_.absoluteFilePath(fileName));
         //QPixmap pix = QPixmap("c:\\gotowe-1.jpg");
         bool canBeConverted;
         fileName.left(fileName.lastIndexOf(".")).toInt(&canBeConverted);
-        if (canBeConverted)
+        if (canBeConverted && (i<3)){
             mImageList.append(QPixmap(_mStartDir_.absoluteFilePath(fileName)));
+            i++;
+        }
         //qDebug() <<"Loading file: " << _mStartDir_.absoluteFilePath(fileName);
     }
 }

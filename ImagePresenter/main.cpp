@@ -20,6 +20,8 @@ int main(int argc, char *argv[])
     QFont appFont = QApplication::font();
     appFont.setPointSize(11);
     QApplication::setFont(appFont);
+
+    a.addLibraryPath(QCoreApplication::applicationDirPath());
     StartAndHelpScreen startScreen;
     Widget w;
 

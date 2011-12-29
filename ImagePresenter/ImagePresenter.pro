@@ -9,18 +9,20 @@ QT       += core gui
 TARGET = ImagePresenter
 TEMPLATE = app
 
-
 SOURCES += main.cpp\
         widget.cpp \
     filemanager.cpp \
-    startandhelpscreen.cpp
+    startandhelpscreen.cpp \
+    aboutbox.cpp
 
 HEADERS  += widget.h \
     filemanager.h \
-    startandhelpscreen.h
+    startandhelpscreen.h \
+    aboutbox.h
 
 FORMS    += widget.ui \
-    startandhelpscreen.ui
+    startandhelpscreen.ui \
+    aboutbox.ui
 
 OTHER_FILES += \
     ImagePresenter.rc
