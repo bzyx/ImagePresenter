@@ -5,7 +5,7 @@
 #include <QPixmap>
 #include <QString>
 
-QString const fileTypes[] = {"*.jpg", "*.gif", "*.tif"};
+QString const fileTypes[] = {"*.jpg", "*.jpeg", "*.gif", "*.tif"};
 
 class FileManager : public QObject
 {

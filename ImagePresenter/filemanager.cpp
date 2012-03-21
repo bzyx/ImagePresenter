@@ -33,7 +33,7 @@ int FileManager::setDirectory(QString dir){
         //We sort all by name igonring the case
         _mStartDir_.setSorting(QDir::Name | QDir::IgnoreCase);
 
-        //reating a list of masks of interesting filetypes
+        //creating a list of masks of interesting filetypes
         QStringList fileTypeList;
         for (unsigned int i=0; i < (sizeof(fileTypes)/sizeof(QString)); i++){
             fileTypeList.append(fileTypes[i]);
@@ -46,15 +46,16 @@ int FileManager::setDirectory(QString dir){
         qDebug() << "How many files" << _mStartDir_.count();
         */
 
-        /*
+
         //Information about files
-        QFileInfoList list = _mStartDir_.entryInfoList();
+        QFileInfoList list = _mStartDir_.entryInfoList(QDir::NoFilter, QDir::Name | QDir::IgnoreCase);
         for (int i = 0; i < list.size(); ++i)  {
             QFileInfo fileInfo = list.at(i);
             qDebug() << qPrintable(QString("%1 %2").arg(fileInfo.size(), 10)
                                    .arg(fileInfo.fileName()));
         }
-        */
+
+
         //Everything goes fine
         return 0;
     }
@@ -69,17 +70,29 @@ int FileManager::setDirectory(QString dir){
 void FileManager::loadImages(){
     //If the directory is not empty creates a list of images
     int i = 0;
-    foreach(QString fileName, _mStartDir_.entryList()){
+    QStringList fileNameList = _mStartDir_.entryList(QDir::NoFilter, QDir::Name | QDir::IgnoreCase);
+    fileNameList.sort();
+    qDebug() << fileNameList;
+    QList<QPixmap> theOtherImages;
+    foreach(QString fileName, _mStartDir_.entryList(QDir::NoFilter, QDir::Name) ){
         //QPixmap pix = QPixmap(_mStartDir_.absoluteFilePath(fileName));
         //QPixmap pix = QPixmap("c:\\gotowe-1.jpg");
         bool canBeConverted;
-        fileName.left(fileName.lastIndexOf(".")).toInt(&canBeConverted);
-        if (canBeConverted && (i<3)){
-            mImageList.append(QPixmap(_mStartDir_.absoluteFilePath(fileName)));
+        int numInFileName = fileName.left(fileName.lastIndexOf(".")).toInt(&canBeConverted);
+        qDebug() << numInFileName;
+        if (canBeConverted ){
+            //if (i > 10)
+            //    break;
+            if (numInFileName < 10){
+                mImageList.append( QPixmap(_mStartDir_.absoluteFilePath(fileName)) );
+            } else {
+            theOtherImages.append(QPixmap(_mStartDir_.absoluteFilePath(fileName)) );
+            }
             i++;
         }
         //qDebug() <<"Loading file: " << _mStartDir_.absoluteFilePath(fileName);
     }
+    mImageList+=theOtherImages;
 }
 int FileManager::count(){
     return mImageList.size()-1;

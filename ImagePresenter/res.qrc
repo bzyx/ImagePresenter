@@ -3,7 +3,4 @@
         <file>qt_pl.ts</file>
         <file>qt_pl.qm</file>
     </qresource>
-    <qresource prefix="/img">
-        <file>logo128.png</file>
-    </qresource>
 </RCC>
