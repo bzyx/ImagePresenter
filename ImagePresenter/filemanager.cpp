@@ -73,7 +73,10 @@ void FileManager::loadImages(){
     QStringList fileNameList = _mStartDir_.entryList(QDir::NoFilter, QDir::Name | QDir::IgnoreCase);
     fileNameList.sort();
     qDebug() << fileNameList;
-    QList<QPixmap> theOtherImages;
+    QList<QPixmap> theOtherImages10;
+    QList<QPixmap> theOtherImages100;
+    QList<QPixmap> theOtherImages1000;
+    QList<QPixmap> theOtherImages10000;
     foreach(QString fileName, _mStartDir_.entryList(QDir::NoFilter, QDir::Name) ){
         //QPixmap pix = QPixmap(_mStartDir_.absoluteFilePath(fileName));
         //QPixmap pix = QPixmap("c:\\gotowe-1.jpg");
@@ -85,14 +88,23 @@ void FileManager::loadImages(){
             //    break;
             if (numInFileName < 10){
                 mImageList.append( QPixmap(_mStartDir_.absoluteFilePath(fileName)) );
-            } else {
-            theOtherImages.append(QPixmap(_mStartDir_.absoluteFilePath(fileName)) );
+            } else if (numInFileName < 99 ){
+                theOtherImages10.append( QPixmap(_mStartDir_.absoluteFilePath(fileName)) );
+            } else if (numInFileName < 999 ){
+                theOtherImages100.append( QPixmap(_mStartDir_.absoluteFilePath(fileName)) );
+            } else if (numInFileName < 9999 ){
+                theOtherImages1000.append( QPixmap(_mStartDir_.absoluteFilePath(fileName)) );
+            } else if (numInFileName < 99999 ){
+                theOtherImages10000.append( QPixmap(_mStartDir_.absoluteFilePath(fileName)) );
             }
             i++;
         }
         //qDebug() <<"Loading file: " << _mStartDir_.absoluteFilePath(fileName);
     }
-    mImageList+=theOtherImages;
+    mImageList+=theOtherImages10;
+    mImageList+=theOtherImages100;
+    mImageList+=theOtherImages1000;
+    mImageList+=theOtherImages10000;
 }
 int FileManager::count(){
     return mImageList.size()-1;

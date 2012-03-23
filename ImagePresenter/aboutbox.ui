@@ -14,7 +14,7 @@
    <string>O programie</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="res.qrc">
+   <iconset>
     <normaloff>:/img/logo128.png</normaloff>:/img/logo128.png</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -27,8 +27,8 @@
       <string>Autor: Marcin Jabrzyk
 E-mail: marcin.jabrzyk@gmail.com
 
-Wersja: 1.0
-28/12/2011</string>
+Wersja: 1.2
+23/03/2012</string>
      </property>
     </widget>
    </item>
@@ -78,9 +78,7 @@ Wersja: 1.0
    </item>
   </layout>
  </widget>
- <resources>
-  <include location="res.qrc"/>
- </resources>
+ <resources/>
  <connections>
   <connection>
    <sender>pushButton</sender>

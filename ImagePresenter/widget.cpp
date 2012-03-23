@@ -85,10 +85,10 @@ void Widget::selectImageDialog()
 {
     int imageNumber = QInputDialog::getInteger(this,"Wybierz obraz",
                                                "Podaj numer obrazu: ",
-                                               fileManager.currentNumber(),0,
-                                               fileManager.count());
+                                               fileManager.currentNumber(),1,
+                                               fileManager.count()+1);
     qDebug() << imageNumber;
-    showImage(fileManager.imageNum(imageNumber));
+    showImage(fileManager.imageNum(imageNumber -1));
 }
 
 bool Widget::showImage(QPixmap image){

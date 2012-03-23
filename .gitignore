@@ -48,3 +48,11 @@ ImagePresenter-build-desktop-Qt_in_PATH_Debug/Makefile
 ImagePresenter/object_script.ImagePresenter.Debug
 ImagePresenter/object_script.ImagePresenter.Release
 ImagePresenter-build-desktop-Qt_in_PATH_Debug/Makefile
+ImagePresenter-build-desktop-Qt_in_PATH_Debug/
+*Makefile*
+ImagePresenter-build-desktop-Qt_in_PATH_Debug
+ImagePresenter-build-desktop-Qt_in_PATH_Debug/Makefile
+ImagePresenter-build-desktop-Qt_in_PATH_Debug/Makefile.Debug
+ImagePresenter-build-desktop-Qt_in_PATH_Debug/Makefile.Release
+ImagePresenter-build-desktop-Qt_in_PATH_Debug/ui_widget.h
+ImagePresenter/ui_*.h
