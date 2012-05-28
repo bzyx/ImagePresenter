@@ -1,5 +1,6 @@
 #include <QDebug>
 
+#include <QMessageBox>
 #include <QGraphicsScene>
 #include <QGraphicsPixmapItem>
 #include <QSpinBox>
@@ -23,7 +24,9 @@ Widget::Widget(QWidget *parent) :
         qWarning() << "There was no file";
     } else {
         fileManager.loadImages();
+        /*
         qDebug() << "I have loaded" << fileManager.count();
+        */
     }
     scene = new QGraphicsScene(this);
 
@@ -33,6 +36,7 @@ Widget::Widget(QWidget *parent) :
 
     //ui->gView->showFullScreen();
     ui->gView->installEventFilter(this);
+
 }
 
 Widget::~Widget()
@@ -86,9 +90,9 @@ void Widget::selectImageDialog()
     int imageNumber = QInputDialog::getInteger(this,"Wybierz obraz",
                                                "Podaj numer obrazu: ",
                                                fileManager.currentNumber(),1,
-                                               fileManager.count()+1);
-    qDebug() << imageNumber;
-    showImage(fileManager.imageNum(imageNumber -1));
+                                               fileManager.count());
+    //qDebug() << imageNumber;
+    showImage(fileManager.imageNum(imageNumber));
 }
 
 bool Widget::showImage(QPixmap image){

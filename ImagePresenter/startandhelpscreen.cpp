@@ -31,3 +31,7 @@ void StartAndHelpScreen::on_pushButton_clicked()
     AboutBox box;
     box.exec();
 }
+
+void StartAndHelpScreen::lockShowButton(){
+    ui->startButton->setEnabled(false);
+}

@@ -1,6 +1,7 @@
 #include <QtGui/QApplication>
 #include <QTextCodec>
 #include <QTranslator>
+#include <QMessageBox>
 
 #include "startandhelpscreen.h"
 #include "widget.h"
@@ -25,10 +26,14 @@ int main(int argc, char *argv[])
     StartAndHelpScreen startScreen;
     Widget w;
 
-
+    if (w.haveNoFiles()){
+        QMessageBox::warning(NULL, "Image presenter - b³¹d", "Uwaga: \n Brak odpowiednich plików w katalogu programu.", QMessageBox::Ok);
+        startScreen.lockShowButton();
+    }
 
     QObject::connect(&startScreen,SIGNAL(startButtonClicked()),
                      &w, SLOT(showFullScreen()));
+
 
     /*
     QObject::connect(&startScreen,SIGNAL(startButtonClicked()),

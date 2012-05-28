@@ -15,6 +15,7 @@ public:
     explicit StartAndHelpScreen(QWidget *parent = 0);
     ~StartAndHelpScreen();
     void setButtonText(QString newText);
+    void lockShowButton();
 
 signals:
     void startButtonClicked();

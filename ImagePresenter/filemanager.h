@@ -1,9 +1,9 @@
 #ifndef FILEMANAGER_H
 #define FILEMANAGER_H
 
+#include <QtCore>
 #include <QObject>
 #include <QPixmap>
-#include <QString>
 
 QString const fileTypes[] = {"*.jpg", "*.jpeg", "*.gif", "*.tif"};
 
@@ -11,7 +11,8 @@ class FileManager : public QObject
 {
     Q_OBJECT
 private:
-    QList<QPixmap> mImageList;
+    //QList<QPixmap> mImageList;
+    QMap <int, QString> fileListMap;
     QString m_currentDir;
     int mLastImageNumber;
 
@@ -25,7 +26,7 @@ public:
     QPixmap nextImage();
     QPixmap prevImage();
     QPixmap currentImage();
-    QPixmap imageNum(int id);
+    QString imageNum(int id);
     int currentNumber();
 
 signals:
